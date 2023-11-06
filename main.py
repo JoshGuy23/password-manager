@@ -7,7 +7,7 @@ from tkinter import *
 # Window
 window = Tk()
 window.title("Password Manager")
-window.config(padx=20, pady=20)
+window.config(padx=50, pady=50)
 
 # Canvas
 logo = PhotoImage(file="logo.png")
