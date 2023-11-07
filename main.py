@@ -4,6 +4,26 @@ from random import randint, choice, shuffle
 import pyperclip
 import json
 
+# ---------------------------- SEARCH TERMS ------------------------------------- #
+
+
+def find_password():
+    website = website_entry.get().lower()
+    try:
+        with open(file="data.json", mode="r") as file:
+            data = json.load(file)
+            if website in data:
+                messagebox.showinfo(title=f"{website}", message=f"Here is your data: "
+                                                                 f"\nemail: {data[website]['email']} "
+                                                                 f"\npassword: {data[website]['password']}")
+            else:
+                messagebox.showerror(title="Website not found", message="No details for the website exists.")
+    except FileNotFoundError:
+        messagebox.showerror(title="Missing data.json", message="No Data File Found")
+    finally:
+        website_entry.delete(0, END)
+
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
            'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
@@ -31,7 +51,7 @@ def generate_password():
 
 
 def save_information():
-    website = website_entry.get()
+    website = website_entry.get().lower()
     email = email_entry.get()
     password = password_entry.get()
 
@@ -79,21 +99,25 @@ canvas.grid(column=1, row=0)
 # Website
 website_label = Label(text="Website:")
 website_label.grid(column=0, row=1)
-website_entry = Entry(width=35)
-website_entry.grid(column=1, row=1, columnspan=2)
+website_entry = Entry(width=21)
+website_entry.grid(column=1, row=1)
 website_entry.focus()
+
+# Search Button
+search_button = Button(text="Search", command=find_password)
+search_button.grid(column=2, row=1)
 
 # Email/Username
 email_label = Label(text="Email/Username:")
 email_label.grid(column=0, row=2)
-email_entry = Entry(width=35)
+email_entry = Entry(width=39)
 email_entry.insert(0, "---@gmail.com")
 email_entry.grid(column=1, row=2, columnspan=2)
 
 # Password
 password_label = Label(text="Password:")
 password_label.grid(column=0, row=3)
-password_entry = Entry(width=17)
+password_entry = Entry(width=21)
 password_entry.grid(column=1, row=3)
 
 # Generate Password
