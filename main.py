@@ -53,7 +53,7 @@ def save_information():
                     data = json.load(file)
                     data.update(new_data)
             except FileNotFoundError:
-                pass
+                data = new_data
 
             with open(file="data.json", mode="w") as file:
                 json.dump(data, file, indent=4)
