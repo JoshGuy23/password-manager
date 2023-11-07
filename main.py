@@ -4,14 +4,16 @@ from random import randint, choice, shuffle
 import pyperclip
 import json
 
-# ---------------------------- SEARCH TERMS ------------------------------------- #
+# ---------------------------- FIND PASSWORD ------------------------------------- #
 
 
 def find_password():
     website = website_entry.get().lower()
+
     try:
         with open(file="data.json", mode="r") as file:
             data = json.load(file)
+
             if website in data:
                 messagebox.showinfo(title=f"{website}", message=f"Here is your data: "
                                                                  f"\nemail: {data[website]['email']} "
