@@ -104,7 +104,7 @@ website_entry.grid(column=1, row=1)
 website_entry.focus()
 
 # Search Button
-search_button = Button(text="Search", command=find_password)
+search_button = Button(text="Search", command=find_password, width=13)
 search_button.grid(column=2, row=1)
 
 # Email/Username
